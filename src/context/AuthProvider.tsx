@@ -8,7 +8,6 @@ import { getPayload } from "@/api/signin"
 import { setupClient, useAuthClient } from "@/clients/AxiosClient"
 import { setBearerAuthorization, useClient } from "../clients/AxiosClient"
 import { isAuthenticated } from "@/utils/permissions"
-import { useAsync } from "@/hooks"
 
 export const AuthContext = createContext({} as IAuth)
 
@@ -20,8 +19,6 @@ const AuthProvider = ({ children }: IProps) => {
 	const [showRedefinePasswordArea, setShowRedefinePasswordArea] =
 		useState(false)
 
-	const { execute } = useAsync()
-
 	const clientConfig = () => {
 		setupClient(process.env.NEXT_PUBLIC_BACK, process.env.NEXT_PUBLIC_AUTH)
 		setBearerAuthorization(useClient(), isAuthenticated())
@@ -29,7 +26,7 @@ const AuthProvider = ({ children }: IProps) => {
 	}
 
 	const getUserId = async () => {
-		const payload = await execute(getPayload())
+		const payload = await getPayload()
 
 		if (payload?.status == 200) {
 			setUserId(payload?.data.userId)
