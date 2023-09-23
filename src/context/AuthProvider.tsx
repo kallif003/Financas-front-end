@@ -31,8 +31,6 @@ const AuthProvider = ({ children }: IProps) => {
 	const getUserId = async () => {
 		const payload = await execute(getPayload())
 
-		console.log(payload)
-
 		if (payload?.status == 200) {
 			setUserId(payload?.data.userId)
 			setEmail(payload?.data.email)

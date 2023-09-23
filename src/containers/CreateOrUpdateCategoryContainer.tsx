@@ -69,7 +69,7 @@ const CreateCategoryContainer = () => {
 	}
 
 	const handleApiResponse = (status: number) => {
-		if (status == 201) {
+		if (status == 201 || status == 204) {
 			setCategory("")
 			setDestinedValeu(0)
 			setShowButton(false)

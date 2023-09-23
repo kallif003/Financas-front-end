@@ -49,8 +49,6 @@ const setTokenAndPermission = (res: any) => {
 
 	const roles = res.data.permission
 
-	console.log("per", res)
-
 	setBearerAuthorization(useAuthClient(), token)
 
 	setIsAuthenticated(token, refreshToken)

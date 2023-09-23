@@ -63,13 +63,10 @@ const ReleaseTable = ({ config }: IReleaseTableConfig) => {
 
 					{config.isOpen && config.releaseIndex == index && (
 						<div className={config.setBackgroundColor(index)}>
-							<div className="overflow-y-auto">
+							<div className="overflow-y-auto xl:overflow-hidden">
 								<Wrapper type="headersReleasesTable">
 									{config.headerReleasesTable.map((items, index) => (
-										<Paragraph
-											key={index}
-											color="light_green"
-											className="sm:overflow">
+										<Paragraph key={index} color="light_green">
 											{items}
 										</Paragraph>
 									))}
