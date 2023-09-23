@@ -45,7 +45,7 @@ const AsyncProvider = ({ children }: IProps) => {
 	) => {
 		if (status == 201 || status == 204) {
 			setApiResponse({ statusCode: status, response: sucessMsg })
-		} else if (status > 204) {
+		} else if (status > 204 && status != 404) {
 			setApiResponse({ statusCode: status, response: errorMsg })
 		}
 	}

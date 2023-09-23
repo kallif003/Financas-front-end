@@ -20,7 +20,7 @@ const DeleteCategoryContainer = () => {
 			Messages.ERROR_DELETING_CATEGORY,
 		)
 
-		if (res?.status == 200) {
+		if (res?.status == 204) {
 			setShowButton(false)
 			getAllCategories(page)
 		}
