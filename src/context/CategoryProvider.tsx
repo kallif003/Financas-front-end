@@ -2,7 +2,6 @@
 "use client"
 
 import { getAllCategoriesApi, getNameOfAllCategoriesApi } from "@/api/category"
-import { Messages } from "@/utils/enum"
 import React, { createContext, useState } from "react"
 import { useAsync, useAuth } from "@/hooks"
 import {
@@ -45,13 +44,15 @@ const CategoryProvider = ({ children }: IProps) => {
 	const getAllCategories = async (currentPage: number) => {
 		const res: any = await execute(
 			getAllCategoriesApi(userId, currentPage, itemsPerPage),
-			"",
-			Messages.THERE_ISNT_DATA,
 		)
 
-		if (res?.status == 201) {
-			parseContent(res?.data.items)
-			setTotalPages(res?.data.totalPages)
+		handleApiResponse(res)
+	}
+
+	const handleApiResponse = (response: any) => {
+		if (response?.status == 200) {
+			parseContent(response.data.items)
+			setTotalPages(response.data.totalPages)
 			getNameOfAllCategories()
 		}
 	}

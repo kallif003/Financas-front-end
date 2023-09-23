@@ -39,10 +39,11 @@ const ReleaseProvider = ({ children }: IProps) => {
 	const getSalary = async () => {
 		const res: any = await execute(takeSalary(userId))
 
-		console.log("salary", res)
-
-		if (res?.data != null) setSalaryValue(res?.data.value)
-		else setShowInfoModal(true)
+		if (res?.data == null || res?.data.value == 0) {
+			setShowInfoModal(true)
+		} else {
+			setSalaryValue(res?.data.value)
+		}
 	}
 
 	const getAllReleases = async (currentPage: number, date?: Date) => {
@@ -65,6 +66,7 @@ const ReleaseProvider = ({ children }: IProps) => {
 		} else {
 			setContent([])
 			setTotalPages(0)
+			getSalary()
 		}
 	}
 
