@@ -51,9 +51,11 @@ const CategoryProvider = ({ children }: IProps) => {
 
 	const handleApiResponse = (response: any) => {
 		if (response?.status == 200) {
-			parseContent(response.data.items)
-			setTotalPages(response.data.totalPages)
+			parseContent(response?.data.items)
+			setTotalPages(response?.data.totalPages)
 			getNameOfAllCategories()
+		} else {
+			setContent([])
 		}
 	}
 

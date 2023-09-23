@@ -3,7 +3,6 @@ import {
 	setBearerAuthorization,
 	useAuthClient,
 	setBasicAuthorization,
-	useClient,
 } from "@/clients/AxiosClient"
 import { Routes } from "@/utils/enum"
 import { setIsAuthenticated, setPermission } from "@/utils/permissions"
@@ -30,10 +29,6 @@ export const signin = async (user: any) => {
 
 export const getPayload = async () => {
 	try {
-		setBearerAuthorization(useClient(), "token")
-
-		setBearerAuthorization(useAuthClient(), "token")
-
 		const res = await useAuthClient().get(Routes.PAYLOAD)
 
 		return res

@@ -6,11 +6,10 @@ import Icon from "@mdi/react"
 import { mdiPencilBoxOutline, mdiCloseCircle } from "@mdi/js"
 import { Pagination } from "antd"
 import React from "react"
-import { useAsync, useCategory } from "@/hooks"
+import { useCategory } from "@/hooks"
 
 const CategoriesArea = ({ config }: ICategoriesConfig) => {
 	const { content, totalPages, categoryName, page } = useCategory()
-	const { apiResponse } = useAsync()
 
 	return (
 		<Container type="container">
@@ -65,37 +64,37 @@ const CategoriesArea = ({ config }: ICategoriesConfig) => {
 					<Paragraph color="white">Ajustar</Paragraph>
 				</Wrapper>
 
-				{apiResponse.statusCode == 404 ? (
-					<p className="text-center mt-44 text-medium_gray">
-						{apiResponse.response}
-					</p>
-				) : (
-					<div>
-						{content.map((c, index) => (
-							<Wrapper
-								key={index}
-								type="categoryContent"
-								className={index % 2 == 0 ? "bg-white_one" : "bg-transparent"}>
-								<Paragraph color="gray">{c.category}</Paragraph>
+				<div>
+					{content.map((c, index) => (
+						<Wrapper
+							key={index}
+							type="categoryContent"
+							className={index % 2 == 0 ? "bg-white_one" : "bg-transparent"}>
+							<Paragraph color="gray">{c.category}</Paragraph>
 
-								<Paragraph color="gray">
-									{c.destinedValue.toLocaleString("pt-BR", {
-										style: "currency",
-										currency: "BRL",
-									})}
-								</Paragraph>
+							<Paragraph color="gray">
+								{c.destinedValue.toLocaleString("pt-BR", {
+									style: "currency",
+									currency: "BRL",
+								})}
+							</Paragraph>
 
-								<Dropdown
-									menu={{ items: config.menu(c.id) }}
-									placement="bottom"
-									arrow>
-									<button>
-										<Icon path={mdiPencilBoxOutline} size={1} />
-									</button>
-								</Dropdown>
-							</Wrapper>
-						))}
-					</div>
+							<Dropdown
+								menu={{ items: config.menu(c.id) }}
+								placement="bottom"
+								arrow>
+								<button>
+									<Icon path={mdiPencilBoxOutline} size={1} />
+								</button>
+							</Dropdown>
+						</Wrapper>
+					))}
+				</div>
+
+				{content.length == 0 && (
+					<Paragraph color="gray" className="text-center mt-44">
+						Não há dados para essa busca no momento
+					</Paragraph>
 				)}
 			</Wrapper>
 
