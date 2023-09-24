@@ -4,7 +4,6 @@
 import { getAllReleasesApi } from "@/api/release"
 import { takeSalary } from "@/api/salary"
 import { useAsync, useAuth } from "@/hooks"
-import { Messages } from "@/utils/enum"
 import { IProps, IReleaseContent, IReleaseContext } from "@/utils/interface"
 import React, { createContext, useState } from "react"
 
@@ -37,7 +36,7 @@ const ReleaseProvider = ({ children }: IProps) => {
 	const [currentDate, setCurrentDate] = useState(formatMonthYear(new Date()))
 
 	const getSalary = async () => {
-		const res: any = await execute(takeSalary(userId))
+		const res: any = await takeSalary(userId)
 
 		if (res?.data == null || res?.data.value == 0) {
 			setShowInfoModal(true)
@@ -51,8 +50,6 @@ const ReleaseProvider = ({ children }: IProps) => {
 
 		const res: any = await execute(
 			getAllReleasesApi(userId, currentPage, itemsPerPage, selectedDate),
-			"",
-			Messages.THERE_ISNT_DATA,
 		)
 
 		handleApiResponse(res)
@@ -62,12 +59,12 @@ const ReleaseProvider = ({ children }: IProps) => {
 		if (response?.status == 200) {
 			parseContent(response?.data.items)
 			setTotalPages(response?.data.totalPages)
-			getSalary()
 		} else {
 			setContent([])
 			setTotalPages(0)
-			getSalary()
 		}
+
+		getSalary()
 	}
 
 	const parseContent = (data: IReleaseContent[]) => {
