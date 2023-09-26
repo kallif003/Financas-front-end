@@ -34,15 +34,15 @@ export default function RootLayout({
 					<BottonNavigationMenu />
 				</div>
 
-				<ValidationProvider>
-					<AsyncProvider>
-						<AcessProvider>
+				<AcessProvider>
+					<ValidationProvider>
+						<AsyncProvider>
 							<ReleaseProvider>
 								<CategoryProvider>{children}</CategoryProvider>
 							</ReleaseProvider>
-						</AcessProvider>
-					</AsyncProvider>
-				</ValidationProvider>
+						</AsyncProvider>
+					</ValidationProvider>
+				</AcessProvider>
 			</body>
 		</html>
 	)
