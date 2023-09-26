@@ -21,7 +21,7 @@ const ReleaseProvider = ({ children }: IProps) => {
 	const [idRelease, setIdRelease] = useState("")
 	const [idCategory, setIdCategory] = useState("")
 	const [releaseCategory, setReleaseCategory] = useState("")
-	const [salaryValue, setSalaryValue] = useState("")
+	const [salaryValue, setSalaryValue] = useState(0)
 
 	const { execute } = useAsync()
 	const { userId } = useAuth()
