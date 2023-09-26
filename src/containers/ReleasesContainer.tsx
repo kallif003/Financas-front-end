@@ -22,7 +22,7 @@ const ReleasesContainer = () => {
 	const { clearApiResponse } = useAsync()
 
 	useEffect(() => {
-		getAllReleases(page)
+		if (userId != "") getAllReleases(page)
 	}, [userId])
 
 	const message =

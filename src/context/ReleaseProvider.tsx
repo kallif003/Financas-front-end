@@ -21,7 +21,7 @@ const ReleaseProvider = ({ children }: IProps) => {
 	const [idRelease, setIdRelease] = useState("")
 	const [idCategory, setIdCategory] = useState("")
 	const [releaseCategory, setReleaseCategory] = useState("")
-	const [salaryValue, setSalaryValue] = useState(0)
+	const [salaryValue, setSalaryValue] = useState(0.0)
 
 	const { execute } = useAsync()
 	const { userId } = useAuth()
@@ -41,7 +41,7 @@ const ReleaseProvider = ({ children }: IProps) => {
 		if (res?.data == null || res?.data.value == 0) {
 			setShowInfoModal(true)
 		} else {
-			setSalaryValue(res?.data.value)
+			setSalaryValue(res?.data?.value)
 		}
 	}
 
