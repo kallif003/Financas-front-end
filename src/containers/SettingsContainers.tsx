@@ -4,7 +4,7 @@ import { Messages } from "@/utils/enum"
 import { generateNewPassword } from "@/api/users"
 import { useAsync, useAuth, useRelease } from "@/hooks"
 import Loading from "@/components/molecules/Loading"
-import { registerSalary } from "@/api/salary"
+import { registerSalary, takeSalary } from "@/api/salary"
 import SalaryArea from "@/components/organisms/SalaryArea"
 import ChangePasswordArea from "@/components/organisms/ChangePasswordArea"
 import { Container } from "@/components/atoms"
@@ -17,12 +17,12 @@ const SettingsContainer = () => {
 
 	const { userId, email } = useAuth()
 	const { execute, showLoading, apiResponse, clearApiResponse } = useAsync()
-	const { salaryValue, setSalaryValue, getSalary } = useRelease()
+	const { salaryValue, setSalaryValue } = useRelease()
 
 	useEffect(() => {
 		clearApiResponse()
 
-		getSalary()
+		if (salaryValue == 0) getSalary()
 	}, [userId])
 
 	const handleSalary = (value: string) => {
@@ -34,10 +34,15 @@ const SettingsContainer = () => {
 		setActiveEdit(!activeEdit)
 	}
 
+	const getSalary = async () => {
+		const res: any = await execute(takeSalary(userId))
+
+		setSalaryValue(res?.data?.value || salaryValue)
+	}
+
 	const handleApiResponse = (status: number) => {
 		if (status == 201) {
-			getSalary()
-			setSalaryValue("")
+			setSalaryValue(salaryValue)
 			setActiveEdit(false)
 			setShowSaveSalaryButton(false)
 		}

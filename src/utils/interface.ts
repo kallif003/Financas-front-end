@@ -237,7 +237,7 @@ export interface IReleaseContext {
 	idRelease: string
 	releaseCategory: string
 	idCategory: string
-	salaryValue: string
+	salaryValue: number
 	setShowInfoModal: Function
 	setSalaryValue: Function
 	setIdCategory: Function
